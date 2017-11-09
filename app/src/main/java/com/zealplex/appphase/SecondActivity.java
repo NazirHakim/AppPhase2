@@ -11,20 +11,36 @@ import android.widget.ListView;
 
 public class SecondActivity extends AppCompatActivity {
 
-     String items[] = new String[] {"section01_data01", "section01_data02", "section01_data03",
-             "section01_data04", "section01_data05","section01_data06", "section01_data07"};
+    ListView mListView;
+
+     String[] companyNames = {"Apple", "Samsung", "Google Pixel", "One Plus",
+             "Oppo", "Vivo","Huawei", "Lava"};
+     int[] companyLogo = {R.drawable.applelogo,
+             R.drawable.samsunglogog,
+             R.drawable.googlelogo,
+             R.drawable.onepluslogo,
+             R.drawable.oppologo,
+             R.drawable.vivologo,
+             R.drawable.huaweilogo,
+             R.drawable.lavalogo
+     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        ListView listview = (ListView) findViewById(R.id.listview);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SecondActivity.this,android.R.layout.simple_selectable_list_item,items);
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView =(ListView) findViewById(R.id.listview);
+        MyAdapter myAdapter = new MyAdapter(SecondActivity.this, companyNames, companyLogo);
+        mListView.setAdapter(myAdapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(SecondActivity.this, ThirdActivity.class ));
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent mIntent = new Intent(SecondActivity.this, ThirdActivity.class );
+                mIntent.putExtra("companyName", companyNames[position]);
+                mIntent.putExtra("companyLogo", companyLogo[position]);
+                startActivity(mIntent);
+
             }
         });
     }

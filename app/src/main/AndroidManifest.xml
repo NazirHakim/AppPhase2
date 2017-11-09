@@ -22,7 +22,7 @@
             android:theme="@style/SecondScreenToolbar" />
         <activity
             android:name=".ThirdActivity"
-            android:label="Android ImageView Border Color"
+            android:label="Android ImageView Background Color"
             android:theme="@style/ThirdScreenToolbar">
         </activity>
     </application>
